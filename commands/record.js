@@ -43,11 +43,12 @@ module.exports = {
         try {
             await entersState(conn, VoiceConnectionStatus.Ready, 20e3);
             let ids = toNum(fs.readdirSync('./recordings'));
+            ids = ids.sort(function (a, b) {  return a - b;  });
             let recording_id = ids[ids.length - 1] + 1;
             await fs.mkdirSync(`./recordings/${recording_id}`);
             await ctx.editReply({ content: `**Joined <#${voiceChannel.id}> and now recording.** Recording ID: \`${recording_id}\``, ephemeral: true });
             client.rec('Ready to record', recording_id);
-            client.recordings.set(ctx.guild.id, { startedAt: Date.now(), startedBy: ctx.user.id, recording_id: recording_id });
+            client.recordings.set(ctx.guild.id, { startedAt: Date.now(), startedBy: ctx.user.id, recording_id: recording_id, textChannelId: ctx.channel.id });
             const receiver = conn.receiver;
 
             receiver.speaking.on('start', (userId) => {
