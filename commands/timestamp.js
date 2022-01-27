@@ -17,7 +17,7 @@ module.exports = {
             .setColor('PURPLE')
             .setDescription(`**Current UNIX timestamp:** \`${timestamp}\``)
             .setTimestamp()
-            .setFooter({ name: 'Mochi - mochibot.me | Saved at', iconURL: avatar });
+            .setFooter({ text: 'Mochi - mochibot.me | Saved', iconURL: avatar });
         await ctx.user.send({ embeds: [embed] });
         await ctx.reply({ content: `**Current UNIX timestamp:** \`${timestamp}\`\n**Check your DMs!**`, ephemeral: true });
     }
