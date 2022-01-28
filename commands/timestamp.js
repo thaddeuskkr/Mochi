@@ -1,4 +1,3 @@
-const { getVoiceConnection } = require('@discordjs/voice');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
@@ -6,11 +5,6 @@ module.exports = {
     description: 'Sends you the current UNIX timestamp to make it easier to find recordings.',
     options: [],
     run: async ({ ctx, avatar }) => {
-        const connection = getVoiceConnection(ctx.guild.id);
-        if (!connection) {
-            await ctx.reply({ content: 'I\'m not currently recording.', ephemeral: true });
-            return; 
-        }
         const timestamp = Date.now();
         const embed = new MessageEmbed()
             .setAuthor({ name: ctx.user.tag, iconURL: ctx.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
